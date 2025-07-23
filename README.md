@@ -3,7 +3,7 @@ markdown
 
 This is a simple Python tool that allows you to select a folder from your computer and automatically organizes all files into subfolders based on their file type/extension (e.g. PDF, JPG, MP4).
 
-### 📦 Features
+### Features
 
 - GUI interface using Tkinter  
 - Select any folder on your computer  
@@ -12,14 +12,14 @@ This is a simple Python tool that allows you to select a folder from your comput
 - Handles files without extensions by placing them in a `NO_EXTENSION` folder  
 - Works on Windows, Linux, and macOS  
 
-### 🛠 Technologies
+### Technologies
 
 - Python 3
 - Tkinter
 - OS module
 - Shutil
 
-### 🚀 How to Use
+### How to Use
 
 1. Clone this repository:
    ```bash
