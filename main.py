@@ -4,46 +4,56 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 
 
-def organizar_pasta(pasta):
+def organize_folder(folder):
     """
-    Organiza todos os arquivos da pasta em subpastas por extensão.
+    Organizes all files in the selected folder into subfolders by file extension.
     """
-    for arquivo in os.listdir(pasta):
-        caminho_arquivo = os.path.join(pasta, arquivo)
+    for file in os.listdir(folder):
+        file_path = os.path.join(folder, file)
 
-        if os.path.isfile(caminho_arquivo):
-            _, extensao = os.path.splitext(arquivo)
-            extensao = extensao[1:].upper()  # Remove ponto e põe em maiúsculas
+        if os.path.isfile(file_path):
+            _, extension = os.path.splitext(file)
+            extension = extension[1:].upper()  # Remove dot and convert to uppercase
 
-            if extensao == '':
-                extensao = 'SEM_EXTENSAO'
+            if extension == '':
+                extension = 'NO_EXTENSION'
 
-            pasta_destino = os.path.join(pasta, extensao)
-            if not os.path.exists(pasta_destino):
-                os.mkdir(pasta_destino)
+            destination_folder = os.path.join(folder, extension)
+            if not os.path.exists(destination_folder):
+                os.mkdir(destination_folder)
 
-            shutil.move(caminho_arquivo, os.path.join(pasta_destino, arquivo))
+            shutil.move(file_path, os.path.join(destination_folder, file))
 
 
-def escolher_pasta():
+def choose_folder():
     """
-    Abre um diálogo para o usuário escolher a pasta a organizar.
+    Opens a dialog for the user to select a folder to organize.
     """
-    pasta = filedialog.askdirectory()
-    if pasta:
-        organizar_pasta(pasta)
-        messagebox.showinfo("Concluído", f"Arquivos organizados em: {pasta}")
+    folder = filedialog.askdirectory()
+    if folder:
+        organize_folder(folder)
+        messagebox.showinfo("Done", f"Files organized in: {folder}")
 
 
-# Cria a janela principal
-janela = tk.Tk()
-janela.title("Organizador de Arquivos por Extensão")
-janela.geometry("300x150")
+# Create the main window
+window = tk.Tk()
+window.title("File Organizer by Extension")
+window.geometry("300x100")
 
-label = tk.Label(janela, text="Clique no botão para escolher a pasta a organizar:")
+label = tk.Label(window, text="Click the button to choose a folder to organize:")
 label.pack(padx=10, pady=10)
 
-botao_escolher = tk.Button(janela, text="Escolher Pasta", command=escolher_pasta)
-botao_escolher.pack(padx=10, pady=10)
+choose_button = tk.Button(window, text="Choose Folder", command=choose_folder)
+choose_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-janela.mainloop()
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+
+window_width = 300
+window_height = 150
+
+x = (screen_width // 2) - (window_width // 2)
+y = (screen_height // 2) - (window_height // 2)
+
+window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+window.mainloop()
